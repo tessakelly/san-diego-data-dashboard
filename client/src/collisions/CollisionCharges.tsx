@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 
-const COLORS = ["#dcebc9",
-"#cab8e5",
-"#abc7a5",
-"#9cb8e2",
-"#dec0a5",
-"#94cfe3",
-"#e6b8c4",
-"#92c2ba",
-"#c7c6dc",
-"#bbeae7"];
+const COLORS = ["#4f602b",
+"#9249cd",
+"#73b643",
+"#cf599b",
+"#64ad86",
+"#d1503a",
+"#7698c2",
+"#c5964c",
+"#625098",
+"#8d474c"];
 
 export default function CollisionCharges() {
     const [data, setData] = useState([]);
@@ -21,7 +21,7 @@ export default function CollisionCharges() {
             .then((res) => setData(res));
     }, []);
 
-    return (<>
+    return (<div className="chart-section">
         <h2 className="chart-header">Primary Cause of Collision</h2>
         <ResponsiveContainer width="100%" height={400}>
             <PieChart width={500} height={300}>
@@ -32,5 +32,5 @@ export default function CollisionCharges() {
                 </Pie>
             </PieChart>
         </ResponsiveContainer>
-    </>)
+    </div>)
 }

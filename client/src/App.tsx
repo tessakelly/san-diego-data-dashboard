@@ -1,10 +1,12 @@
 import './App.css';
-import { MonthlyCollisions } from './MonthlyCollisions';
+import CollisionCharges from './collisions/CollisionCharges';
+import { MonthlyCollisions } from './collisions/MonthlyCollisions';
 
 function App() {
-  return (
+  return (<>
+    <CollisionCharges/>
     <MonthlyCollisions/>
-  );
+  </>);
 }
 
 export default App;

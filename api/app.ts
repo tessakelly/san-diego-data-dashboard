@@ -3,9 +3,8 @@ import express, { Express, Request, Response, NextFunction } from 'express';
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-import * as collisions from './routes/collisions';
 
-var indexRouter = require('./routes/index');
+import collisionsRouter from './routes/collisions';
 
 var app = express();
 
@@ -15,8 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.get('/collisions', collisions.getCollisionsByMonth);
+app.use('/collisions', collisionsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req: Request, res: Response, next: NextFunction) {

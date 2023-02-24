@@ -1,5 +1,18 @@
 #!/usr/bin/env node
 
+
+import sequelize from './sequelize';
+
+async function assertDatabaseConnectionOk() {
+    try {
+        await sequelize.authenticate();
+        console.log('Connected to the database');
+    } catch(err) {
+        console.error('Unable to connect to the database, error: ' + err);
+        process.exit(1);
+    }
+}
+
 /**
  * Module dependencies.
  */
@@ -25,9 +38,15 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+async function init() {
+  await assertDatabaseConnectionOk();
+
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', onListening);
+}
+
+init();
 
 /**
  * Normalize a port into a number, string, or false.

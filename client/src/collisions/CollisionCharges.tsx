@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 const COLORS = ["#4f602b",
 "#9249cd",
@@ -14,6 +14,17 @@ const COLORS = ["#4f602b",
 
 export default function CollisionCharges() {
     const [data, setData] = useState([]);
+
+    const totalCollisions = data.reduce(
+        (prev, current) => prev + current.count, 0
+    );
+
+    function tooltipFormatter(value, name) {
+        return [
+            `${value} (${(value/totalCollisions * 100).toFixed(1)}%)`,
+            name
+        ]
+    }
 
     useEffect(() => {
         fetch('/collisions/charges')
@@ -30,6 +41,7 @@ export default function CollisionCharges() {
                         <Cell key={index} fill={COLORS[index % COLORS.length]}/> 
                     ))}
                 </Pie>
+                <Tooltip formatter={tooltipFormatter}/>
             </PieChart>
         </ResponsiveContainer>
     </div>)

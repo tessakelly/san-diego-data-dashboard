@@ -8,7 +8,8 @@ export default function(sequelize: Sequelize) {
     Collision.init({
         reportId: {
             type: DataTypes.TEXT,
-            field: 'report_id'
+            field: 'report_id',
+            primaryKey: true
         },
         dateTime: {
             type: DataTypes.DATE,
@@ -22,45 +23,45 @@ export default function(sequelize: Sequelize) {
             type: DataTypes.INTEGER,
             field: 'address_no_primary'
         },
-        address_pd_primary: {
+        addressPdPrimary: {
             type: DataTypes.TEXT,
             field: 'address_pd_primary'
         },
-        address_road_primary: {
+        addressRoadPrimary: {
             type: DataTypes.TEXT,
             field: 'address_road_primary'
         },
-        address_sfx_primary: {
+        addressSfxPrimary: {
             type: DataTypes.TEXT,
             field: 'address_sfx_primary'
         },
-        address_pd_intersecting: {
+        addressPdIntersecting: {
             type: DataTypes.TEXT,
             field: 'address_pd_intersecting'
         },
-        address_name_intersecting: {
+        addressNameIntersecting: {
             type: DataTypes.TEXT,
             field: 'address_name_intersecting'
         },
-        address_sfx_intersecting: {
+        addressSfxIntersecting: {
             type: DataTypes.TEXT,
             field: 'address_sfx_intersecting'
         },
-        violation_section: {
+        violationSection: {
             type: DataTypes.TEXT,
             field: 'violation_section'
         },
-        violation_type: {
+        violationType: {
             type: DataTypes.TEXT,
             field: 'violation_type'
         },
-        charge_desc: {
+        chargeDesc: {
             type: DataTypes.TEXT,
             field: 'charge_desc'
         },
         injured: DataTypes.SMALLINT,
         killed: DataTypes.SMALLINT,
-        hitRunLevel: {
+        hitRunLvl: {
             type: DataTypes.TEXT,
             field: 'hit_run_lvl'
         }

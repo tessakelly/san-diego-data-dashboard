@@ -6,7 +6,8 @@ module.exports = {
     await queryInterface.createTable('collisions', {
       reportId: {
           type: Sequelize.DataTypes.TEXT,
-          field: 'report_id'
+          field: 'report_id',
+          primaryKey: true
       },
       dateTime: {
           type: Sequelize.DataTypes.DATE,
@@ -20,45 +21,45 @@ module.exports = {
           type: Sequelize.DataTypes.INTEGER,
           field: 'address_no_primary'
       },
-      address_pd_primary: {
+      addressPdPrimary: {
           type: Sequelize.DataTypes.TEXT,
           field: 'address_pd_primary'
       },
-      address_road_primary: {
+      addressRoadPrimary: {
           type: Sequelize.DataTypes.TEXT,
           field: 'address_road_primary'
       },
-      address_sfx_primary: {
+      addressSfxPrimary: {
           type: Sequelize.DataTypes.TEXT,
           field: 'address_sfx_primary'
       },
-      address_pd_intersecting: {
+      addressPdIntersecting: {
           type: Sequelize.DataTypes.TEXT,
           field: 'address_pd_intersecting'
       },
-      address_name_intersecting: {
+      addressNameIntersecting: {
           type: Sequelize.DataTypes.TEXT,
           field: 'address_name_intersecting'
       },
-      address_sfx_intersecting: {
+      addressSfxIntersecting: {
           type: Sequelize.DataTypes.TEXT,
           field: 'address_sfx_intersecting'
       },
-      violation_section: {
+      violationSection: {
           type: Sequelize.DataTypes.TEXT,
           field: 'violation_section'
       },
-      violation_type: {
+      violationType: {
           type: Sequelize.DataTypes.TEXT,
           field: 'violation_type'
       },
-      charge_desc: {
+      chargeDesc: {
           type: Sequelize.DataTypes.TEXT,
           field: 'charge_desc'
       },
       injured: Sequelize.DataTypes.SMALLINT,
       killed: Sequelize.DataTypes.SMALLINT,
-      hitRunLevel: {
+      hitRunLvl: {
           type: Sequelize.DataTypes.TEXT,
           field: 'hit_run_lvl'
       }

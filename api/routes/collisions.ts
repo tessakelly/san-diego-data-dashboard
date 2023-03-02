@@ -2,6 +2,10 @@ import express, { Request, Response } from 'express';
 import { Sequelize } from 'sequelize';
 import makeHandlerAwareOfAsyncErrors from '../middleware/makeHandlerAwareOfAsyncErrors';
 import { Collision } from "../sequelize/models/collision.model";
+import { parse, Options as ParseOptions } from 'csv-parse';
+import snakeCaseToCamelCase from '../utilities/snakeCaseToCamelCase';
+import { DATA_URLS } from '../constants';
+import { promisify } from 'util';
 
 var router = express.Router();
 
@@ -45,6 +49,22 @@ router.get('/charges', makeHandlerAwareOfAsyncErrors(async (req: Request, res: R
     });
 
     res.send(simplifiedResult);
+}));
+
+router.post('/import', makeHandlerAwareOfAsyncErrors(async (req: Request, res: Response) => {
+    const fetchResponse = await fetch(DATA_URLS.COLLISIONS);
+    const file = await fetchResponse.text();
+    const promisifiedParse = promisify<string, ParseOptions, any[]>(parse);
+    const records = await promisifiedParse(file, {
+        columns: header => header.map((column: string) => snakeCaseToCamelCase(column)),
+        cast: true
+    });
+
+    await Collision.bulkCreate(records, {
+        returning: false,
+        ignoreDuplicates: true
+    });
+    res.send('Ok');
 }));
 
 export default router;
